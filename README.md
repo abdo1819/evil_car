@@ -18,3 +18,5 @@ placed in car_1 can detect it and report the violation for car car_2
 
 ## prototype _ideas_:
 1. a respery pi witch read the data from car using obd then transmiting using wifi to computer server
+2. maquette of rouad with two _traffic sign plate_ as server and car . at the route start the car recive the speed limit from first plate,
+at the road end the car report if it has passed the speed and get the new speed
