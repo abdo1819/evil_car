@@ -45,6 +45,8 @@ the model would be able to
 
 
 ## refrance projects
-[path-hole-detection](https://medium.com/@percepsense/intelligent-pothole-detection-879ef635dd38?)
-[lane detection](https://github.com/wvangansbeke/LaneDetection_End2End)
-[front car detetction_no code](https://www.youtube.com/watch?v=pQuUW3Jp8ic)
+>[path-hole-detection](https://medium.com/@percepsense/intelligent-pothole-detection-879ef635dd38?)
+
+>[lane detection](https://github.com/wvangansbeke/LaneDetection_End2End)
+
+>[front car detetction_no code](https://www.youtube.com/watch?v=pQuUW3Jp8ic)
