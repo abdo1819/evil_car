@@ -11,11 +11,15 @@ instead of fixed point as traffic man or lidar for detectinng trafic violation w
 2. for one way road if car_2 happen to pass car_1 from the coming diraction a camera 
 placed in car_1 can detect it and report the violation for car car_2
 
+
 ## for communication methods :
-1. fixed point in the road entry were information exchange occur the 
+~~1. fixed point in the road entry were information exchange occur the 
 	* the car send any violation 
-	* the point update the road roles
-2. gsm communication were car gets continuse updates and report any violation
+	* the point update the road roles~~
+>we will not use v2x communication we only regulate human behavior with low cost device can be placed in car without the mad security concern [why_not_DSRC](https://hackaday.com/2019/02/21/when-will-our-cars-finally-speak-the-same-language-dsrc-for-vehicles/) 
+
+
+2. gsm celular communication were car gets continuse updates and report any violation
 
 
 ## prototype _ideas_:
