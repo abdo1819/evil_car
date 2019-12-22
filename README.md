@@ -12,6 +12,7 @@ instead of fixed point as traffic man or lidar for detectinng trafic violation w
 placed in car_1 can detect it and report the violation for car car_2
 
 
+
 ## for communication methods :
 ~~1. fixed point in the road entry were information exchange occur the 
 	* the car send any violation 
