@@ -19,17 +19,23 @@ placed in car_1 can detect it and report the violation for car car_2
 >we will not use v2x communication we only regulate human behavior with low cost unreliable device can be placed in car without the mad security concern or low latency war [why_not_DSRC](https://hackaday.com/2019/02/21/when-will-our-cars-finally-speak-the-same-language-dsrc-for-vehicles/) 
 
 
-2. gsm celular communication were car gets continuse updates and report any violation
+2. gsm celular communication where car gets continuse updates and report any violation
 
+3. wifi bse station for car to report 
 
 ## prototype _ideas_:
 1. a respery pi witch read the data from car using obd then transmiting using wifi to computer server
-2. maquette of rouad with two _traffic sign plate_ as server and car . at the route start the car recive the speed limit from first plate,
-at the road end the car report if it has passed the speed and get the new speed
+~~2. maquette of road with two _traffic sign plate_ as server and car . at the route start the car recive the speed limit from first plate,
+at the road end the car report if it has passed the speed and get the new speed~~
+> we use celular data / wifi
+
+3. maquette of road where car will pass certain speed and report it when connecting to wifi network at road stop
+
 
 ## final version _concept_
 a camera placed in front of car like dvr with inboard computer, gps, ultrasonic 
 the model would be able to 
-* detect visaul detectable violations like passing and wrong turn ..etc
+* find visaul detectable violations like wrong passing or turn checking ..etc
 * speed violation with gps 
-* space from front car with ultrasonic 
+~~* space from front car with ultrasonic ~~
+> seems unreliable and hard to use
