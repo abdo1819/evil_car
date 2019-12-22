@@ -1,5 +1,7 @@
 # car self reporting for trafic violation:
 
+> project state : under decision
+
 ## overview
 instead of fixed point as traffic man or lidar for detectinng trafic violation we will be using in car sensors or planting others like cameras or gps module for detecting various vilations
 
