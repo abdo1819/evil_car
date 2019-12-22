@@ -40,5 +40,5 @@ a camera placed in front of car like dvr with inboard computer, gps, ultrasonic
 the model would be able to 
 * find visaul detectable violations like wrong passing or turn checking ..etc
 * speed violation with gps 
-~~* space from front car with ultrasonic ~~
-> seems unreliable and hard to use
+~~* space from front car with ultrasonic~~
+> seems unreliable and hard to use as vehical will not always be in front
