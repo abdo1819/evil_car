@@ -1,4 +1,6 @@
 # car self reporting for trafic violation:
+
+## overview
 instead of fixed point as traffic man or lidar for detectinng trafic violation we will be using in car sensors or planting others like cameras or gps module
 
 ## use case:
@@ -7,7 +9,7 @@ instead of fixed point as traffic man or lidar for detectinng trafic violation w
 2. for one way road if car_2 happen to pass car_1 from the coming diraction a camera 
 placed in car_1 can detect it and report the violation for car car_2
 
-## for communication we had  two approaches :
+## for communication methods :
 1. fixed point in the road entry were information exchange occur the 
 	* the car send any violation 
 	* the point update the road roles
