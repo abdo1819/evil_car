@@ -42,3 +42,9 @@ the model would be able to
 * speed violation with gps 
 ~~* space from front car with ultrasonic~~
 > seems unreliable and hard to use as vehical will not always be in front
+
+
+## refrance projects
+[path-hole-detection](https://medium.com/@percepsense/intelligent-pothole-detection-879ef635dd38?)
+[lane detection](https://github.com/wvangansbeke/LaneDetection_End2End)
+[front car detetction_no code](https://www.youtube.com/watch?v=pQuUW3Jp8ic)
