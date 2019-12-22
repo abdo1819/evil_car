@@ -11,6 +11,7 @@ instead of fixed point as traffic man or lidar for detectinng trafic violation w
 2. for one way road if car_2 happen to pass car_1 from the coming diraction a camera 
 placed in car_1 can detect it and report the violation for car car_2
 
+3. reporting a problem in road like hole or open side .. etc
 
 
 ## for communication methods :
