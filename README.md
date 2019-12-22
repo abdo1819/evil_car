@@ -16,7 +16,7 @@ placed in car_1 can detect it and report the violation for car car_2
 ~~1. fixed point in the road entry were information exchange occur the 
 	* the car send any violation 
 	* the point update the road roles~~
->we will not use v2x communication we only regulate human behavior with low cost device can be placed in car without the mad security concern [why_not_DSRC](https://hackaday.com/2019/02/21/when-will-our-cars-finally-speak-the-same-language-dsrc-for-vehicles/) 
+>we will not use v2x communication we only regulate human behavior with low cost unreliable device can be placed in car without the mad security concern or low latency war [why_not_DSRC](https://hackaday.com/2019/02/21/when-will-our-cars-finally-speak-the-same-language-dsrc-for-vehicles/) 
 
 
 2. gsm celular communication were car gets continuse updates and report any violation
