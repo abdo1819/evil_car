@@ -5,15 +5,29 @@
 ## overview
 instead of fixed point as traffic man or lidar for detectinng trafic violation we will be using in car sensors or planting others like cameras or gps module for detecting various vilations
 
+## decreption
+A system that adds a smart self-reporting functionality to report traffic violations
+
+## Why do we need "yet another device" in our current traffic system?!
+* Our current system doesn't completely control the traffic 
+* We can do it much better safer and less error-prone if we let the car track itself
+* We all want  safer roads
+
+## But how our device is going to help?
+Reducing the human factor [most probably errors]
+Ensuring that vehicles are properly tracked
+Utilizing the resulting data to make more accurate decisions about roads safety 
+
+
 ## use case:
 1. for speed violation a computer placed in car -raspberry for our prototype- will connect to car obd to read the car speed  ,same time it will retrive the speed limit from the server , if the car passed the limit for extended period it will report it to server
 
-2. for one way road if car_2 happen to pass car_1 from the coming diraction a camera 
-placed in car_1 can detect it and report the violation for car car_2
+2. for one way road if car_2 happen to pass car_1 from the left diraction a camera 
+placed in car_1 can detect it and report the violation for car_2
 
-~~3. reporting a problem in road like hole or open side .. etc~~
-> seems prety hard for fast cars [roadai](https://www.vaisala.com/en/blog/2019-09/how-road-condition-analysis-computer-vision-changing-cities-and-transportation-departments) i think we still can propose it
-
+3. reporting a problem in road like hole or open side .. etc
+~~> seems prety hard for fast cars [roadai](https://www.vaisala.com/en/blog/2019-09/how-road-condition-analysis-computer-vision-changing-cities-and-transportation-departments) i think we still can propose it~~
+> but we can use this approch accelerometer, gyroscope, and speed [1] 
 
 ## for communication methods :
 ~~1. fixed point in the road entry were information exchange occur the 
@@ -32,7 +46,7 @@ placed in car_1 can detect it and report the violation for car car_2
 at the road end the car report if it has passed the speed and get the new speed~~
 > we use celular data / wifi
 
-3. maquette of road where car will pass certain speed and report it when connecting to wifi network at road stop
+~~3. maquette of road where car will pass certain speed and report it when connecting to wifi network at road stop~~
 
 
 ## final version _concept_
