@@ -25,10 +25,11 @@
       - calculate speed from distance and time 
       - find accuracy of reading
 
-  2. easy way
+  ~~2. easy way
     - use android things 
       1. build/find driver for gps module
-      2. use sdk to get speed accyracy the speed [andriond.loaction](https://developer.android.com/reference/android/location/Location.html#getSpeed())
+      2. use sdk to get speed accyracy the speed [andriond.loaction](https://developer.android.com/reference/android/location/Location.html#getSpeed())~~
+      google has ended support for [android things](https://arstechnica.com/gadgets/2019/02/android-things-is-no-longer-for-things-focuses-on-smart-speakers-and-displays/)
 
 
 
