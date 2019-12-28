@@ -8,6 +8,29 @@ instead of fixed point as traffic man or lidar for detectinng trafic violation w
 ## decreption
 A system that adds a smart self-reporting functionality to report traffic violations
 
+## shocking numbers
+- 57% percent of road accidents because of humans [US](https://www.fhwa.dot.gov/publications/publicroads/95winter/p95wi14.cfm)
+[!alt](https://www.fhwa.dot.gov/publications/publicroads/95winter/imgs/p95wi17.gif)
+
+- driver with higher violation rate are more likely to be part of accidant
+[!img](https://www.researchgate.net/profile/Mohamed_Ahmed43/publication/304996080/figure/fig6/AS:391179976888372@1470275982803/Accident-rate-per-driver-based-on-the-historical-total-violation-records-during-five-years_W640.jpg)
+- percent increase with hazard violation
+[!with_hazard](https://www.researchgate.net/profile/Mohamed_Ahmed43/publication/304996080/figure/fig9/AS:391307441786884@1470306372255/Estimated-percentage-of-driver-involved-in-accidents_W640.jpg)
+
+- 20% from accident because of wrong passing[AEU](https://www.emaratalyoum.com/local-section/accidents/2015-05-02-1.780310)
+
+### first quarter 2015 with 4806 accidents
+
+	- 1232 wrong passing
+	- 151 leaving break speed
+	- 125 ignorance not carring
+	- 98 wrong lane 
+	- 83 extra speed
+	- 81 not making sure of route before entering
+	- 53 red light passing
+	- 40 candient piorty
+
+
 ## Why do we need "yet another device" in our current traffic system?!
 * Our current system doesn't completely control the traffic 
 * We can do it much better safer and less error-prone if we let the car track itself
