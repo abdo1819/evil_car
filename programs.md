@@ -13,9 +13,10 @@
     2. get speed limit (limit)[https://developers.google.com/maps/documentation/roads/speed-limits]
 
 2. harder not  much reliable
-  - detect Road Plates
-  - identify speed Plates
-  - read numbers
+  - use opencv
+    1. detect Road Plates
+    2. identify speed Plates
+    3. read numbers
     
 # get current speed 
 1. hard way
