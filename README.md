@@ -8,7 +8,7 @@ instead of fixed point as traffic man or lidar for detectinng trafic violation w
 ## decreption
 A system that adds a smart self-reporting functionality to report traffic violations
 
-## shocking numbers
+##  numbers
 - 57% percent of road accidents because of humans [US](https://www.fhwa.dot.gov/publications/publicroads/95winter/p95wi14.cfm)
 [!alt](https://www.fhwa.dot.gov/publications/publicroads/95winter/imgs/p95wi17.gif)
 
