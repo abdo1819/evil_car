@@ -45,7 +45,8 @@ class line_detector():
 
         return canny
     
-    def diplay_lines(self, img, lines):
+
+    def image_with_lines(self, img, lines):
         line_image = np.zeros_like(img)
         if lines is not None:
             for line in lines:
@@ -53,7 +54,9 @@ class line_detector():
                 cv2.line(line_image,(x1,y1),(x2,y2),(255,0,0),10) # Draw a Blue Line(BGR in OpenCV)
 
         combo_image = cv2.addWeighted(img,0.8,line_image,1,1)    # Imposing the line_image on the original image
-        cv2.imshow('img',combo_image)
+         
+        return combo_image
+        
         
         return
         
