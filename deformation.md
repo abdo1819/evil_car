@@ -6,7 +6,7 @@ Sources:
 - [https://www.researchgate.net/publication/289226869](https://www.researchgate.net/publication/289226869?fbclid=IwAR3r3JqmdvvMgAKW3MGblwI7z_7E5AirIS2Xjl9Q6gsz_XpyvrYY_gvkVQs)
   Accelerometer based road defects identification system (only use 0.8*g as threshold)
 
-
+- https://pimylifeup.com/raspberry-pi-accelerometer-adxl345/
 
 
 
@@ -16,15 +16,15 @@ Scenario :
 
 - `smooth_accl(arrx,arry=None,arrz=None): `
 
-  - uses max abs filter to detect abnormal acceleration  only  : ![filter](C:\Users\modern\Desktop\evil_car\filter.png)
+  - uses max abs filter to detect abnormal acceleration  only  : ![filter](filter.png)
 
     used for smoothing signal (signal comes with noise):
 
-    ![noisy](C:\Users\modern\Desktop\evil_car\noisy.png)
+    ![noisy](noisy.png)
 
 after apply filter : signal becomes : we can see that we only maintained the abnormal change while others minimized  
 
- ![max](C:\Users\modern\Desktop\evil_car\max.png)
+ ![max](max.png)
 
 - detect abnormal event for ensuring that maximum of z acceleration is larger than 0.8g and other values is about 0 and lasts for 80% of the time during sampling
 - if abnormal happens send location of GPS
