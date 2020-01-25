@@ -1,0 +1,21 @@
+Scenario :  
+
+- read accleration data in x,y,z 
+
+- `smooth_accl(arrx,arry=None,arrz=None): `
+
+  - uses max abs filter to detect abnormal acceleration  only  : ![filter](C:\Users\modern\Desktop\evil_car\filter.png)
+
+    used for smoothing signal (signal comes with noise):
+
+    ![noisy](C:\Users\modern\Desktop\evil_car\noisy.png)
+
+after apply filter : signal becomes : we can see that we only maintained the abnormal change while others minimized  
+
+ ![max](C:\Users\modern\Desktop\evil_car\max.png)
+
+- detect abnormal event for ensuring that maximum of z acceleration is larger than 0.8g and other values is about 0 and lasts for 80% of the time during sampling
+- if abnormal happens send location of GPS
+- `calc_speed(arrx,step,arry=None,arrz=None):` uses Romberg integration to calculate speed from acceleration  after smoothing in x,y,z 
+  - for romberg integrattion samples number is 2^k+1 
+- calculate sum of speed speed= sqrt(sppedx^2+speedy^2+speedz^2)
