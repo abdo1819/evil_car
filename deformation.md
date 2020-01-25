@@ -1,3 +1,15 @@
+Sources: 
+
+-  [https://www.researchgate.net/publication/317918892](https://www.researchgate.net/publication/317918892?fbclid=IwAR0tP3XDGXy81UlMOT9whiRUiYAsamMZMroSvq4uztEYyFkDh6qfyEwhneI)
+  Vehicle Vibration Signal Processing for Road Surface Monitoring    (I took concept of max abs filter )
+
+- [https://www.researchgate.net/publication/289226869](https://www.researchgate.net/publication/289226869?fbclid=IwAR3r3JqmdvvMgAKW3MGblwI7z_7E5AirIS2Xjl9Q6gsz_XpyvrYY_gvkVQs)
+  Accelerometer based road defects identification system (only use 0.8*g as threshold)
+
+
+
+
+
 Scenario :  
 
 - read accleration data in x,y,z 
