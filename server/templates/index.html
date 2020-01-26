@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .topnav {
+            overflow: hidden;
+            height: 75px;
+            background-color: #F6D55C;
+            text-align: center;
+
+        }
+
+        .topnav a {
+            font-size: 30px;
+            font-family: monospace;
+            line-height: 75px;
+            text-decoration: none;
+            color: #173F5F;
+        }
+
+        .content {
+            font-family: monospace;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            padding: 12px;
+            border-style: solid;
+            border-width: 4px;
+            border-color: #20639B;
+            color: #20639B;
+            font-weight: 500;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Self Reporting Car C-Panel </title>
+</head>
+
+<body style="text-align: center ;margin: 0px; background-color: white;">
+    <div style="text-align: center;">
+        <div class="topnav">
+            <a href="{{url_for('get_violations_json')}}">Violations list </a>
+        </div>
+        <div id="root"></div>
+        <script>
+            const URL = 
+            let obj = {}
+            fetch(URL)
+                .then(data => data.json())
+                .then((res) => {
+                    res.forEach(element => {
+                        let e = document.createElement("div")
+                        e.setAttribute("class", "content")
+                        e.innerHTML = "<p>ID: " + element.id + "</p>"
+                            + "<p>Longitude: " + element.longitude + "</p>"
+                            + "<p>Latitude: " + element.latitude + "</p>"
+                            + "<p>Speed: " + element.speed + "</p>"
+                            + "<p>Date & Time: " + element.time + "</p>"
+
+                        let root = document.getElementById("root")
+                        root.appendChild(e)
+                    });
+                })
+        </script>
+</body>
+</html>
