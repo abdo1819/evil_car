@@ -80,6 +80,17 @@ the model would be able to
 ~~* space from front car with ultrasonic~~
 > seems unreliable and hard to use as vehical will not always be in front
 
+some links to help us 
+https://www.raspberrypi.org/forums/viewtopic.php?t=143301
+https://www.rhydolabz.com/wiki/?p=10450
+
+
+plan B 
+https://www.instructables.com/id/Use-your-android-phone-sensors-on-the-arduino-/
+https://create.arduino.cc/projecthub/botletics/real-time-2g-3g-lte-arduino-gps-tracker-iot-dashboard-01d471?ref=tag&ref_id=tracking&offset=2
+https://www.instructables.com/id/How-to-Receive-Arduino-Sensor-Data-on-Your-Android/
+
+
 
 ## refrance projects
 >[path-hole-detection](https://medium.com/@percepsense/intelligent-pothole-detection-879ef635dd38?)
@@ -87,3 +98,7 @@ the model would be able to
 >[lane detection](https://github.com/wvangansbeke/LaneDetection_End2End)
 
 >[front car detetction_no code](https://www.youtube.com/watch?v=pQuUW3Jp8ic)
+
+
+server in heroku
+https://github.com/abdo1819/server_evilcar/tree/master
