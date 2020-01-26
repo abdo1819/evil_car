@@ -1,7 +1,9 @@
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
+from logging import Logger
 
-        
+
 
 
 class line_detector():
@@ -12,20 +14,78 @@ class line_detector():
         canny_image = self.canny(img)
         cropped_image = self.region_of_interest(canny_image)
         lines = cv2.HoughLinesP(cropped_image,2,np.pi/180,100,np.array([]),minLineLength=10,maxLineGap=5)
-        
-        if self.debug:
-            self.diplay_lines(img, lines)
+        # l = line()
+        # for line in  lines:
+            # if = l.slope(line) 
+
+        # if self.debug:
+            # self.diplay_lines(img, lines)
         
         return lines
 
-    def region_of_interest(self, image):
-        height,width = image.shape
-        polygons = np.array([
-            [(0,height),(width,height),(width,int(height/2)),(0,int(height/2))]
-        ])          # Triangle polygon because cv2.fillPoly expects an array of polygons.
+    def lines_histogram(self, img):
         
+        y = np.sum(img,axis=0)
+        x = np.arange(0,img.shape[1])
+        
+        plt.plot(x, y)
+
+        plt.show()
+
+    def WarpPerspective(self, image):
+        
+        height,width = image.shape[0:2]
+        
+        y = height
+        x = width
+        
+        src,dst = self.ROI(image)
+        # transformation matrix to make lines parallel
+        M = cv2.getPerspectiveTransform(src, dst)
+        
+        return cv2.warpPerspective(image, M, (x,y), flags=cv2.INTER_LINEAR)
+
+
+    def ROI(self, image):
+        height,width = image.shape[0:2]
+
+        
+        # bottom_left=[150,720] 
+        # bottom_right=[1250,720] 
+        # top_left=[590,450] 
+        # top_right=[700,450] 
+
+
+        bottom_left=[10,970] 
+        bottom_right=[1800,970] 
+        top_left=[800,820] 
+        top_right=[980,820] 
+
+        # bottom_left=(50,height) 
+        # bottom_right= (50,int(height/2))
+        # top_left=(int(width/2+width*.4),height) 
+        # top_right=(int(width/2-width*.4),int(height/2)) 
+
+
+        src = np.array([
+            bottom_left,top_left,top_right,bottom_right
+        ],np.float32)          # Triangle polygon because cv2.fillPoly expects an array of src.
+        
+
+        # dst_width = bottom_right - bottom_left
+        # dst_hight = height * .6
+        # dst = np.array([
+            # [bottom_left-50,]
+        # ])
+        dst= np.float32([[0 ,height], [0  ,0], [width ,0], [width ,height]]) # Destination Points for Image Warp
+
+        return src,dst
+
+
+    def region_of_interest(self, image):
+        src,dst = self.ROI(image)
         mask = np.zeros_like(image)   # Create a black mask to apply the above cube.
-        cv2.fillPoly(mask,polygons,255)     # A complete white triangle polygon on a black mask.
+        cv2.fillPoly(mask,src,255)     # A complete white triangle polygon on a black mask.
         masked_image = cv2.bitwise_and(image,mask)
 
         if self.debug:
@@ -57,6 +117,16 @@ class line_detector():
          
         return combo_image
         
+class line():
+
+    def __init__(self, lines=[]):
+        self.lines = lines
+
+    def slope(self, line):
+        x1 = line[0,0]
+        y1 = line[0,1]
         
-        return
+        x2 = line[1,0]
+        y2 = line[1,1]
         
+        return (y2-y1)/(x2-x1)
