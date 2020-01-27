@@ -50,26 +50,23 @@ class line_detector():
         height,width = image.shape[0:2]
 
         
-        # bottom_left=[150,720] 
-        # bottom_right=[1250,720] 
-        # top_left=[590,450] 
-        # top_right=[700,450] 
 
+    def ROI(self, image):
+        height,width = image.shape[0:2]
 
-        bottom_left=[10,970] 
-        bottom_right=[1800,970] 
-        top_left=[800,820] 
-        top_right=[980,820] 
+        # bottom_left=[0,670] 
+        # bottom_right=[1325,670] 
+        # top_left=[725,525] 
+        # top_right=[1005,525] 
 
-        # bottom_left=(50,height) 
-        # bottom_right= (50,int(height/2))
-        # top_left=(int(width/2+width*.4),height) 
-        # top_right=(int(width/2-width*.4),int(height/2)) 
-
+        bottom_left=(0,height) 
+        bottom_right= (0,int(height/2))
+        top_left=(width,height) 
+        top_right=(width,int(height/2)) 
 
         src = np.array([
-            bottom_left,top_left,top_right,bottom_right
-        ],np.float32)          # Triangle polygon because cv2.fillPoly expects an array of src.
+            [bottom_left,top_left,top_right,bottom_right]
+        ])          # Triangle polygon because cv2.fillPoly expects an array of polygons.
         
 
         # dst_width = bottom_right - bottom_left
@@ -98,7 +95,7 @@ class line_detector():
     def canny(self, image):
         gray = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)
         blur = cv2.GaussianBlur(gray,(5,5),0)   # Kernel size is 5x5
-        canny = cv2.Canny(blur,50,150)
+        canny = cv2.Canny(blur,100,200)
 
         if self.debug:
             cv2.imshow('canny', canny)
