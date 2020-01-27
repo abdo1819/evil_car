@@ -8,7 +8,18 @@ Sources:
 
 - https://pimylifeup.com/raspberry-pi-accelerometer-adxl345/
 
+- problem :
+  - every road has some of these : ![poth](poth.png)
+  - it makes our trips harder to finish
+  - it ruins our cars 
+  - we have to detect them to fix them 
 
+- Solution :
+  - know forces that affects our car gives us how car went up or down .....but how it's done ?
+  - ![acc](acc.png)
+  gives forces in 3 directions 
+  - [xyz](xyz.png)
+  - it tells us when signifigant increase or decrease in Z direction (when car falls)
 
 Scenario :  
 
