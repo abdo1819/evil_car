@@ -2,3 +2,5 @@ data/
 LaneDetection_End2End/
 Udacity-CarND-Advanced-Lane-Lines/
 __pycache__/
+OpenCV-Dashcam-Car-Detection/
+SCNN_Pytorch/
