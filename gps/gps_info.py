@@ -78,23 +78,23 @@ def convert_to_degrees(raw_value):
 # 29.335655, 30.887433
 #----------------------------------------test ------------------------------------------------
 def get_speed():
- GPS_Info()
-  lat_1=lat_in_degrees
-  long_1=long_in_degrees
+    GPS_Info()
+    lat_1=lat_in_degrees
+    long_1=long_in_degrees
 
-  sleep(3) 
-  GPS_Info()
-  lat_2=lat_in_degrees
-  long_2=long_in_degrees
+    sleep(3) 
+    GPS_Info()
+    lat_2=lat_in_degrees
+    long_2=long_in_degrees
   
-  dlong = long_2 - long_1 
-  dlat  = lat_2 - lat_1 
-  a = sin(dlat/2)**2 + cos(lat_1) * cos(lat_2) * sin(dlong/2)**2
-  c = 2 * asin(sqrt(a)) 
-  # Radius of earth in kilometers is 6371
-  km = 6371* c
-  speed = km/(3/ (60*60))
-  return speed 
+    dlong = long_2 - long_1 
+    dlat  = lat_2 - lat_1 
+    a = sin(dlat/2)**2 + cos(lat_1) * cos(lat_2) * sin(dlong/2)**2
+    c = 2 * asin(sqrt(a)) 
+    # Radius of earth in kilometers is 6371
+    km = 6371* c
+    speed = km/(3/ (60*60))
+    return speed 
 
 def calculate_initial_compass_bearing(pointA, pointB):
        
