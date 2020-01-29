@@ -1,4 +1,4 @@
-from res.models.erfnet_road import Net
+from res.models.erfnet import Net
 
 import torch
 import torch.nn.functional as F
@@ -18,7 +18,9 @@ class lane_detector_nn():
         self.resize_factor = 5
         self.debug = debug
         self.cnn = Net().cpu()
-        weights_name = 'weights_erfnet_road.pth'
+        # weights_name = 'weights_erfnet_road.pth'
+        weights_name = 'weights_erfnet.pth'
+
 
         weights_path = os.path.join('res', 'weights', weights_name)
         # weights_path = 'state_dict.pth'
@@ -45,8 +47,10 @@ class lane_detector_nn():
             
             output = self.cnn(input_tensor)
         
-        output, output_road = output
-        road_type = output_road.max(dim=1)[1][0]
+        # output, output_road = output
+        output = output
+
+        # road_type = output_road.max(dim=1)[1][0]
         
         ### Classification
         output = output.max(dim=1)[1]
