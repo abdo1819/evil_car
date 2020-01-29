@@ -21,6 +21,7 @@ detector = line_detector(debug=True)
 lines,lines_all = detector.get_lines(frame)
 
 img = detector.image_with_lines(frame,lines)
+detector.draw_ROI(frame)
 img_lines = detector.image_with_lines(frame,lines_all)
 
 cv2.imshow('frame',img)

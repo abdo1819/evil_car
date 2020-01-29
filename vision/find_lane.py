@@ -3,7 +3,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 from logging import Logger
 
+cascade_file = "cascade_dir/cascade.xml"
+class car_detector():
+    def __init__(self,cascade_file =cascade_file ,debug=False):
+        self.cascade_file = cascade_file
+        self.debug = debug
 
+    def get_cars(self, image):
+        car_cascade = cv2.CascadeClassifier(self.cascade_file)
+        gray_image = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)   
+        cars = car_cascade.detectMultiScale(gray_image,1.2,5)
+
+        return cars
+
+    def draw_cars(self,img,cars):
+        if cars is not None:
+            for (x,y,w,h) in cars:
+                cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2) 
 
 
 class line_detector():
@@ -15,7 +31,7 @@ class line_detector():
         cropped_image = self.region_of_interest(canny_image)
         lines = cv2.HoughLinesP(cropped_image,1,np.pi/180,100,np.array([]),minLineLength=15,maxLineGap=20)
         try:
-            avg_lines = self.get_lines_slope_intecept(img,lines)
+            avg_lines,lines = self.get_lines_slope_intecept(img,lines)
         except :
             return lines,lines
 
@@ -156,12 +172,12 @@ class line_detector():
         right_lengths = []
 
         def get_line_length( line):
-            x1, y1, x2, y2 = line[0]
+            x1, y1, x2, y2 = line
             return np.sqrt((y2-y1)**2 + (x2-x1)**2)
 
         def get_line_slope_intercept(line):
             
-            x1, y1, x2, y2 = line[0]
+            x1, y1, x2, y2 = line
             if x2-x1 == 0:
                 return np.inf, 0
             
@@ -169,19 +185,33 @@ class line_detector():
             intercept = y1 - slope * x1
             return slope, intercept
 
-        for line in lines:
+        min_slope=-np.pi/8
+        max_slope=np.pi/8
+
+        filtered_lines_idx = []
+
+        for idx in np.ndindex(lines.shape[:2]):
+            line = lines[idx]
             slope, intercept = get_line_slope_intercept(line)
             if slope == np.inf:
                 continue
             line_len = get_line_length(line)
             if slope < 0:
-                if np.arctan(slope) < -np.pi/8:
+                if np.arctan(slope) < min_slope:
                     left_lines.append((slope, intercept))
                     left_lengths.append(line_len)
+                else:
+                    filtered_lines_idx.append(idx)
             else :
-                if np.arctan(slope) > np.pi/8:
+                if np.arctan(slope) > max_slope:
                     right_lines.append((slope, intercept))
                     right_lengths.append(line_len)
+                else:
+                    filtered_lines_idx.append(idx)
+
+                
+        
+        filtered_lines = np.delete(lines,filtered_lines_idx,0)
                 
         # average
         left_avg = np.dot(left_lengths, left_lines)/np.sum(left_lengths) if len(left_lengths) > 0 else None
@@ -204,6 +234,5 @@ class line_detector():
         left_lane = convert_slope_intercept_to_line(y1, y2, left_avg)
         right_lane = convert_slope_intercept_to_line(y1, y2, right_avg)
 
-
-        return np.array([left_lane, right_lane])
+        return np.array([left_lane, right_lane]),filtered_lines
 

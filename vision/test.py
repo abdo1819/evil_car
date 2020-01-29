@@ -1,8 +1,9 @@
 import numpy as np
 import cv2
-from find_lane import line_detector
+from find_lane import line_detector , car_detector
 import matplotlib.pyplot as plt
 
+# debug = True
 debug = False
 
 
@@ -18,17 +19,20 @@ if debug ==True:
     cv2.namedWindow('white',cv2.WINDOW_NORMAL)
 
 
+detector = line_detector(debug=debug)
+car_detector = car_detector(debug=debug)
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
 
     # Our operations on the frame come here
-    detector = line_detector(debug=debug)
+
+    cars = car_detector.get_cars(frame)
+    car_detector.draw_cars(frame,cars)
 
     lines,lines_all = detector.get_lines(frame)
 
     img = detector.image_with_lines(frame,lines)
-    img_lines = detector.image_with_lines(frame,lines_all)
     
 
 
@@ -36,7 +40,12 @@ while(True):
     cv2.imshow('frame',img)
      
     cv2.resizeWindow('frame', 820,480)
+
     if debug ==True:
+        detector.draw_ROI(img)
+        img_lines = detector.image_with_lines(frame,lines_all)
+        cv2.imshow('lines',img_lines)
+
         cv2.resizeWindow('lines', 820,480)
         # cv2.resizeWindow('mask', 820,480)
         cv2.resizeWindow('masked_img', 820,480)
