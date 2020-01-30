@@ -1,5 +1,5 @@
 # from gps.gps import gps
-from accel.deffrential import accel
+from accel import accel
 
 # gps_module = gps()
 accel_module = accel()
