@@ -46,16 +46,16 @@ class accel:
             self.counter=0
     
     def smooth_accl(self,arrx,arry=None,arrz=None):
-        maxX=np.max(arrx)
+        maxX=np.max(arrx)+1
         print(maxX)
         arrx=arrx*np.abs(arrx)/maxX
         print(str(type(arry)))
         if type(arry) !=type(None) :
-            maxY=np.max(arry)
+            maxY=np.max(arry)+1
             arry=arry*np.abs(arry)/maxY
                 
         if type(arrz) !=type(None) :
-            maxZ=np.max(arrz)
+            maxZ=np.max(arrz)+1
             arrz=arrz*np.abs(arrz)/maxZ
     def detect_humbs(self,arrz,arrx):
         """
@@ -63,7 +63,7 @@ class accel:
         make sure that max vlaue of hump is about 0.8g (car is falling )
         make sur that hump occured in only small amount of time
         """
-        if np.abs(np.max(arrz)) > 0.8*9.8 :
+        if np.abs(np.abs(np.max(arrz))-9.8) > 0.8*9.8 :
             low = np.where(arrz < 0.15*9.8)
             if len(low)/len(arrz) >= 0.7:
                 print ("humb")
