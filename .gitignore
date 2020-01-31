@@ -5,3 +5,6 @@ vision/__pycache__/find_lane.cpython-38.pyc
 .gsm.py.swp
 image/
 opencv/
+vision/find_lane.pyc
+vision/vision_nn/state_dict.pth
+vision/vision_nn/state_dict.pt
