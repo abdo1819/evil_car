@@ -1,3 +1,5 @@
+
+#Learn more or give us feedback
 # gsm module
 import serial
 import time
@@ -10,9 +12,9 @@ class gsm:
     def __init__(self,verbose=True):
         self.verbose = verbose
         
-        self.host = 'evilcar.herokuapp.com' # the URL of the server 
+        self.host = '"evilcar.herokuapp.com"' # the URL of the server 
         self.request = '/speed?lat=31.205753&long=29.924526'
-        self.apn = "internet.etisalat"
+        self.apn = '"internet.etisalat"'
         self.port = 80
 
 
@@ -34,7 +36,7 @@ class gsm:
         time.sleep(1)
 
     def isready(self,ser):
-    ''' set all current parameters to user defined profile'''
+        ''' set all current parameters to user defined profile'''
         ser.write(str.encode('ATZ'+'\r\n'))
         time.sleep(2)
         reply=ser.read(ser.inWaiting())
@@ -42,23 +44,22 @@ class gsm:
         time.sleep(1)
     
     def connectgsm(self,ser,apn):
-    ''' start task and set apn user id , password'''
-        ser.write("AT+CSTT="+ apn +'"",""'+str.encode('\r\n'))
+        ''' start task and set apn user id , password'''
+        ser.write(str.encode("AT+CSTT="+ apn +',"",""'+'\r\n'))
         time.sleep(2)
         reply=ser.read(ser.inWaiting())
         self.debug(reply)     
         time.sleep(1)
         #bringing up network
-        ser.write('AT+CIICR'+str.encode('\r\n'))
+        ser.write(str.encode('AT+CIICR'+'\r\n'))
         time.sleep(2)
         reply=ser.read(ser.inWaiting())
-        while reply!='OK' :
-                reply=ser.read(ser.inWaiting())
+       
         self.debug(reply)     
         time.sleep(1)
 
         # getting IP address
-        ser.write('AT+CIFSR'+str.encode('\r\n'))
+        ser.write(str.encode('AT+CIFSR'+'\r\n'))
         time.sleep(3)
         reply=ser.read(ser.inWaiting())
         self.debug(reply)     
@@ -69,39 +70,50 @@ class gsm:
         return reply
 
     def connectTCP(self,ser, host , port):
-    ''' connect to the tcp'''
-        ser.write('AT+CIPSTART="TCP"',+ host +","+str.encode(port)+str.encode('\r\n'))
-        time.sleep(5)
+        ''' connect to the tcp'''
+        print("tcpConnect")
+        ser.write(str.encode('at+cdnsgip='+host+'\r\n'))
+        time.sleep(3)
         reply=ser.read(ser.inWaiting())
-        while reply!='OK':
-                reply=ser.read(ser.inWaiting())
         self.debug(reply)
+        time.sleep(3)
+        print("___________________")
+        last_char=str(reply).split(host+',"')[-1].split(".")[-1].split('"')[0]
+        first_3chars=str(reply).split(host+',"')[-1].split(".")[0:3]
+        ip=first_3chars[0]+'.'+first_3chars[1]+'.'+first_3chars[2]+'.'+last_char
+        print(str(ip))
+        time.sleep(2    )
+        ser.write(str.encode('AT+CIPSTART="TCP"'+','+ str(ip) +","+str(port)+'\r\n'))
+        time.sleep(2    )
+        reply=ser.read(ser.inWaiting())
+        self.debug(reply)
+
         return reply     
         time.sleep(1)
 
     def sendHTTPRequest(self,ser,host,request):
-    ''' send function'''
-        ser.write('AT+CIPSEND'+'\r\n')
+        ''' send function'''
+        ser.write(str.encode('AT+CIPSEND'+'\r\n'))
         time.sleep(2)
-        request ="GET " + request +str.encode("HTTP/1.1\r\nHost:"+ host + "\r\n\r\n")
-        ser.write(request + chr(26))
+        ser.write(str.encode('AT+CIPSEND'+'\r\n'))
+        
+        request =str.encode("GET " + request +" HTTP/1.1\r\nHost:"+ host.split('"')[1] + "\r\n\r\n")
+        ser.write(request )
+        ser.write(str.encode(chr(26)))
         time.sleep(2)
-    
+        reply=ser.read(ser.inWaiting())
+        self.debug(reply)
     def closeTCP(self,ser,showresponse=False):
-    ''' close TCP'''
-        ser.write('AT+CIPCLOSE=1'+'\r\n')
+        ''' close TCP'''
+        ser.write(str.encode('AT+CIPCLOSE=1'+'\r\n'))
         reply=ser.read(ser.inwaiting())
         if showresponse:
             print ("server response:\n" + reply[(reply.index("SEND OK") + 9):])
         time.sleep(2)        
 
     def getIPstatus(self,ser):
-    ''' get IPStatus'''
-        ser.write('AT+CIPSTATUS'+str.encode('\r\n'))
+        ''' get IPStatus'''
+        ser.write(str.encode('AT+CIPSTATUS'+str.encode('\r\n')))
         time.sleep(1)
         reply=ser.read(ser.inWaiting())
         return reply                
-
-
-
-
