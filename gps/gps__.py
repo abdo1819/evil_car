@@ -8,7 +8,7 @@ import serial
 class gps:
     def __init__(self):
         self.gpgga_info = "$GPGGA,"
-        self.ser = serial.Serial("/dev/ttyUSB1", baudrate = 115200 )
+        self.ser = serial.Serial("/dev/ttyUSB0", baudrate = 115200 , timeout=6)
        
         # self.ser.write( str.encode('AT+GPS=1'+'\r\n'))            # open gps
         # # ser.write(str.encode('AT+AGPS=1'+'\r\n'))            # open gps
@@ -72,7 +72,6 @@ class gps:
 
         print("ENDgpsINFO")
         return -1 ,-1
-
     #convert raw NMEA string into degree decimal format
     def convert_to_degrees(self,raw_value):
         decimal_value = raw_value/100.00
@@ -199,3 +198,4 @@ class gps:
         pass
     except TypeError:
         pass
+
