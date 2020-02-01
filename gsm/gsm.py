@@ -113,7 +113,7 @@ class gsm:
         return reply     
          
 
-    def sendHTTPRequest_GET(self,ser,host,request):
+    def sendHTTPRequest_GET(self,ser,host,request,rec_json=False):
         ''' send function'''
         ser.write(str.encode('AT+CIPSEND'+'\r\n'))
         time.sleep(2)
@@ -124,15 +124,18 @@ class gsm:
         reply=ser.read(ser.inWaiting())
         json=[]
         res={}
-        if(len(str(reply).split("{"))>0):
-            if(len(str(reply).split("{")[-1])>0):
-                if(len(str(reply).split("{")[-1].split('}'))>0):
-                    print("yes")
-                    json = str(reply).split("{")[-1].split('}')[0].split(':')
-                    res = {json[i]: json[i + 1] for i in range(0, len(json), 2)} 
+        if rec_json==True:
+           if(len(str(reply).split("{"))>0):
+               if(len(str(reply).split("{")[-1])>0):
+                   if(len(str(reply).split("{")[-1].split('}'))>0):
+                       print("yes")
+                       json = str(reply).split("{")[-1].split('}')[0].split(':')
+                       res = {json[i]: json[i + 1] for i in range(0, len(json), 2)} 
         #print(str(reply).split("\r\n\r\n")[1].split("\n\r\n\r\n\x00")[1])
-        print("___json",json[0].split(':'))
+           print("___json",json[0].split(':'))
+
         self.debug(reply)
+        
         print("final result:",res)
         return res
     def sendHTTPRequest_POST(self,ser,host,request):
@@ -147,19 +150,22 @@ class gsm:
         time.sleep(2)
         reply=ser.read(ser.inWaiting())
         time.sleep(2)
-
-        self.ser.write(str.encode('AT+GPSRD=1'+'\r\n'))
         self.debug(reply)
          
     
     def closeTCP(self,ser,showresponse=False):
         ''' close TCP'''
         ser.write(str.encode('AT+CIPCLOSE=1'+'\r\n'))
-        reply=ser.read(ser.inwaiting())
+        reply=ser.read(ser.inWaiting())
         if showresponse:
-            print ("server response:\n" + reply[(reply.index("SEND OK") + 9):])
-        time.sleep(2)        
+            print ("server response:\n" + str(reply))
+        time.sleep(2)
 
+        self.ser.write(str.encode('AT+GPSRD=1'+'\r\n'))
+        time.sleep(2)        
+        time.sleep(2)
+
+        self.ser.write(str.encode('AT+GPSRD=1'+'\r\n'))
     def getIPstatus(self,ser):
         ''' get IPStatus'''
         ser.write(str.encode('AT+CIPSTATUS'+str.encode('\r\n')))

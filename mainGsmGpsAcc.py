@@ -1,16 +1,31 @@
 from gsm.gsm import gsm
-
+speed=0
 gsm_ = gsm()
 def send_vio(long,lat):
+    gsm_.__init__()
     gsm_.current_lat=str(lat)
     gsm_.current_long=str(long)
     gsm_.request='/report'
+    gsm_.speed=speed
     gsm_.isready(gsm_.ser)
     gsm_.connectgsm(gsm_.ser,gsm_.apn)
     gsm_.connectTCP(gsm_.ser,gsm_.host,80)
     gsm_.sendHTTPRequest_POST(gsm_.ser,gsm_.host,gsm_.request)
     
+    gsm_.closeTCP(gsm_.ser,gsm_.host)
 
+    
+def send_obstacle(long,lat):
+    gsm_.__init__()
+    gsm_.current_lat=str(lat)
+    gsm_.current_long=str(long)
+    gsm_.request='/obstacles?lat='+str(lat)+'&long='+str(long)
+    gsm_.isready(gsm_.ser)
+
+    gsm_.connectgsm(gsm_.ser,gsm_.apn)
+    gsm_.connectTCP(gsm_.ser,gsm_.host,80)
+    gsm_.sendHTTPRequest_GET(gsm_.ser,gsm_.host,gsm_.request)
+    gsm_.closeTCP(gsm_.ser,gsm_.host)
 # from gps.gps import gps
 from  gps.gps__ import gps 
 import time as t
@@ -32,25 +47,26 @@ speedacc=(0,0)
 
 while True:
     print("hey")    
-    if(long1 != -1 or lat1!= -1 ):
-        lat1,long1=g.GPS_Info()
+#    if(long1 != -1 or lat1!= -1 ):
+    lat1,long1=g.GPS_Info()
     
     t1=t.time()
     humb,speedacctemp = accel_module.get_humb_speed()
     speedacc=speedacctemp+speedacc
     speedaccsqrt=np.sqrt(np.power(speedacc[0],2)+np.power(speedacc[1],2))
     print("_______accl",speedaccsqrt,humb)
-    t.sleep(2)
-    if(long1 != -1 or lat1!= -1 ):
+    if(humb):
+        send_obstacle(lat1,long1)
+    #if(long1 != -1 or lat1!= -1 ):
     
-        lat2,long2= g.GPS_Info()
+    lat2,long2= g.GPS_Info()
     time = t1 - t.time()
     
     speed = g.get_speed(lat1,long1,lat2,long2,time)
     
     print("speed___GPS",speed)
     speed_limit = 2
-    if speed ==0:
+    if speed ==0 or speed ==-1 :
         speed=speedaccsqrt[0]
     print("___act speed",speed)
     if(speed >speed_limit):    
