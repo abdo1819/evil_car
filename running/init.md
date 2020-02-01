@@ -1,6 +1,7 @@
 # summery ideal case:
 1. create network name : `A` pass = `i12345678`
-2. find ip with fing app from other mobil or `ping raspberrypi.local`
+2. find ip with [__fing__](https://play.google.com/store/apps/details?id=com.overlook.android.fing
+) at other phone app from other mobil or `ping raspberrypi.local`
 3. connect with putty ssh `putty.exe --ssh pi@192.168.43.237 22`
 or use gui ask @ siam
 4. deactivate image enviroment `deactivate`
