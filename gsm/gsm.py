@@ -3,7 +3,21 @@
 # gsm module
 import serial
 import time
-
+import json 
+def write_request(content_str
+                ,host
+                ,method="GET"
+                ,path="/"
+                ,content_type="application/json"
+                ,new_line="\r\n"
+                ,http_version="HTTP/1.1"
+                ):
+    return method+" "+path+" "+http_version+new_line \
+        +"Host: "+host+new_line \
+        +"Content-Type: "+content_type+new_line \
+        +"Content-Length: "+str(len(content_str))+new_line*2 \
+        +content_str \
+        +new_line           
 class gsm:
     def debug(self,reply):
         if self.verbose :
@@ -13,7 +27,12 @@ class gsm:
         self.verbose = verbose
         
         self.host = '"evilcar.herokuapp.com"' # the URL of the server 
-        self.request = '/speed?lat=31.205753&long=29.924526'
+        self.current_lat='0'
+        self.current_long='0'
+        self.current_speed=0
+        self.time=''
+        
+        self.request = '/speed?lat='+self.current_long+'&long='+self.current_long
         self.apn = '"internet.etisalat"'
         self.port = 80
 
@@ -90,19 +109,53 @@ class gsm:
 
         return reply     
         time.sleep(1)
-
-    def sendHTTPRequest(self,ser,host,request):
+    def sendHTTPRequest_GET(self,ser,host,request):
         ''' send function'''
         ser.write(str.encode('AT+CIPSEND'+'\r\n'))
         time.sleep(2)
-        ser.write(str.encode('AT+CIPSEND'+'\r\n'))
-        
-        request =str.encode("GET " + request +" HTTP/1.1\r\nHost:"+ host.split('"')[1] + "\r\n\r\n\r")
+        request =str.encode(write_request("",host.split('"')[1],"GET",request)+ "\r\n\r\n")
         ser.write(request )
         ser.write(str.encode(chr(26)))
         time.sleep(2)
         reply=ser.read(ser.inWaiting())
+        json=[]
+        res={}
+        if(len(str(reply).split("{"))>0):
+            if(len(str(reply).split("{")[-1])>0):
+                if(len(str(reply).split("{")[-1].split('}'))>0):
+                    print("yes")
+                    json = str(reply).split("{")[-1].split('}')[0].split(':')
+                    res = {json[i]: json[i + 1] for i in range(0, len(json), 2)} 
+        #print(str(reply).split("\r\n\r\n")[1].split("\n\r\n\r\n\x00")[1])
+        print("___json",json[0].split(':'))
         self.debug(reply)
+        print("final result:",res)
+        return res
+        def sendHTTPRequest_POST(self,ser,host,request):
+        ''' send function'''
+        ser.write(str.encode('AT+CIPSEND'+'\r\n'))
+        time.sleep(2)
+        request =str.encode(write_request("",host.split('"')[1],"POST",request)+ "\r\n\r\n")
+        ser.write(request )
+        ser.write(str.encode(chr(26)))
+        time.sleep(2)
+        reply=ser.read(ser.inWaiting())
+        json=[]
+        res={}
+        if(len(str(reply).split("{"))>0):
+            if(len(str(reply).split("{")[-1])>0):
+                if(len(str(reply).split("{")[-1].split('}'))>0):
+                    print("yes")
+                    json = str(reply).split("{")[-1].split('}')[0].split(':')
+                    res = {json[i]: json[i + 1] for i in range(0, len(json), 2)} 
+        #print(str(reply).split("\r\n\r\n")[1].split("\n\r\n\r\n\x00")[1])
+        print("___json",json[0].split(':'))
+        self.debug(reply)
+        print("final result:",res)
+        return res
+    
+
+    
     def closeTCP(self,ser,showresponse=False):
         ''' close TCP'''
         ser.write(str.encode('AT+CIPCLOSE=1'+'\r\n'))
@@ -116,4 +169,5 @@ class gsm:
         ser.write(str.encode('AT+CIPSTATUS'+str.encode('\r\n')))
         time.sleep(1)
         reply=ser.read(ser.inWaiting())
-        return reply                
+        return reply      
+        from socket import gethostbyname
