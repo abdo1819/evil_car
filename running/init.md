@@ -25,7 +25,7 @@ try 'ssh pi@192.168.43.237'
 
 - if flailed
 
-connect lab to same network and try to ping pi
+connect laptop to same network and try to ping pi
 `ping raspberrypi.local`
 ```
 PING raspberrypi.local (192.168.1.131): 56 data bytes
@@ -34,15 +34,13 @@ PING raspberrypi.local (192.168.1.131): 56 data bytes
 ```
 
 if failed 
-> open fing app from __OTHER__ phone connect in same network https://play.google.com/store/apps/details?id=com.overlook.android.fing
+open fing app from __OTHER__ phone connect in same network https://play.google.com/store/apps/details?id=com.overlook.android.fing
 
 if no other phone available
-> try angry ip scanner for windows https://angryip.org/download/#windows
+try `angry ip scanner` for windows https://angryip.org/download/#windows
 
 if all above failed use ethernet cable 
 - try them again with ethernet 
-in pi run to get ip
->'ifconfig'
 
 
 ## runnning gps/gsm/acc code
