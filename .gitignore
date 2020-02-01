@@ -8,3 +8,4 @@ opencv/
 vision/find_lane.pyc
 vision/vision_nn/state_dict.pth
 vision/vision_nn/state_dict.pt
+vision/test_result/file_.avi
