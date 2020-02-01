@@ -5,7 +5,7 @@
 or use gui ask @ siam
 4. deactivate image enviroment `deactivate`
 5. run  `python3 mainGsmGpsAcc.py`
-
+__application links at bottom__
 
 ## connecting to rasbery 
 
