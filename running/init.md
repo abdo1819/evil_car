@@ -11,8 +11,12 @@ __application links at bottom__
 ## connecting to rasbery 
 
 create hostspot from mobile with config:
-ssid = A
-pass = i12345678
+
+ssid = `A`
+
+pass = `i12345678`
+
+if failed restart raspery 
 
 or use ethernet to add other network at `/etc/wpa_supplicant/wpa_supplicant.conf`
 
@@ -20,8 +24,9 @@ or use ethernet to add other network at `/etc/wpa_supplicant/wpa_supplicant.conf
 try 'ssh pi@192.168.43.237'
 
 - if flailed
-> connect lab to same network and try to ping pi
-'ping raspberrypi.local'
+
+connect lab to same network and try to ping pi
+`ping raspberrypi.local`
 ```
 PING raspberrypi.local (192.168.1.131): 56 data bytes
 64 bytes from 192.168.43.237: icmp_seq=0 ttl=255 time=2.618 ms
