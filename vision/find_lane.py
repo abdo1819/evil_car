@@ -10,21 +10,41 @@ class car_detector():
         self.debug = debug
 
     def get_cars(self, image):
+        ''' finds car using haar-features for given image
+
+        Args:
+            image: numpy array of RGB image
+
+        Returns:
+            cars: (mx4) array with m is number of detected cars
+                and coloms is x,y,w,h bottom rectangle
+                              x,y rectangle bottom
+                              w,h wedth and hieght
+        '''
         car_cascade = cv2.CascadeClassifier(self.cascade_file)
-        gray_image = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)   
+        gray_image = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)
         cars = car_cascade.detectMultiScale(gray_image,1.2,5)
 
         return cars
 
     def draw_cars(self,img,cars):
+        """draw a red rectangle around cars in next imshow call
+
+        Args:
+            img : np.array to draw recangles on 
+            cars: (mx4) array with m is number of detected cars
+                and coloms is x,y,w,h bottom rectangle
+                              x,y rectangle bottom
+                              w,h wedth and hieght
+        """
         if cars is not None:
             for (x,y,w,h) in cars:
-                cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2) 
+                cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
 
 
 class line_detector():
     def __init__(self, debug = False):
-        self.debug = debug 
+        self.debug = debug
 
     def get_lines(self, img):
         canny_image = self.canny(img)
@@ -37,56 +57,56 @@ class line_detector():
 
         if self.debug:
            return avg_lines,lines
-        
+
         return avg_lines,[]
 
     def lines_histogram(self, img):
-        
+
         y = np.sum(img,axis=0)
         x = np.arange(0,img.shape[1])
-        
+
         plt.plot(x, y)
 
         plt.show()
 
     def WarpPerspective(self, image):
-        
+
         height,width = image.shape[0:2]
-        
+
         y = height
         x = width
-        
+
         src,dst = self.ROI(image)
         # transformation matrix to make lines parallel
         M = cv2.getPerspectiveTransform(src, dst)
-        
+
         return cv2.warpPerspective(image, M, (x,y), flags=cv2.INTER_LINEAR)
 
     def draw_ROI(self,image):
         vertiexs = self.ROI(image)[0]
         lower_left, top_left, top_right, lower_right = vertiexs
-        
+
         color_r = [0, 0, 255]
-        color_g = [0, 255, 0]        
+        color_g = [0, 255, 0]
         line_width = 5
 
         cv2.line(image, tuple(lower_left), tuple(top_left), color_r, line_width)
         cv2.line(image, tuple(lower_left), tuple(lower_right), color_r , line_width * 2)
         cv2.line(image, tuple(top_right), tuple(lower_right), color_r, line_width)
         cv2.line(image, tuple(top_right), tuple(top_left), color_g, line_width)
-        
+
         return image
-    
+
     def ROI(self, image):
         ''' return list of numpy array with region vertics
         in order : lower_left, top_left, top_right, lower_right
         '''
         # height,width = image.shape[0:2]
 
-        # bottom_left=(0,height) 
+        # bottom_left=(0,height)
         # bottom_right= (0,int(height/2))
-        # top_left=(width,height) 
-        # top_right=(width,int(height/2)) 
+        # top_left=(width,height)
+        # top_right=(width,int(height/2))
 
         # src = np.array([
         #     [bottom_left,top_left,top_right,bottom_right]
@@ -105,7 +125,7 @@ class line_detector():
     def region_of_interest(self, image):
         src = self.ROI(image)
         mask = np.zeros_like(image)   # Create a black mask to apply the above cube.
-        cv2.fillPoly(mask,src,255)     # A complete white triangle polygon on a black mask.        
+        cv2.fillPoly(mask,src,255)     # A complete white triangle polygon on a black mask.
         masked_image = cv2.bitwise_and(image,mask)
 
         if self.debug:
@@ -115,9 +135,9 @@ class line_detector():
         return masked_image
 
     def color_mask(self,image):
-        gray_image = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)  
-        
-        img_hsv = cv2.cvtColor(image,cv2.COLOR_RGB2HSV)  
+        gray_image = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)
+
+        img_hsv = cv2.cvtColor(image,cv2.COLOR_RGB2HSV)
 
         lower_yellow = np.array([30, 100, 100], dtype = "uint8")
         upper_yellow = np.array([100, 255, 255], dtype="uint8")
@@ -148,9 +168,9 @@ class line_detector():
 
         if self.debug:
             cv2.imshow('canny', canny_edges)
-            
+
         return canny_edges
-    
+
 
     def image_with_lines(self, img, lines):
         line_image = np.zeros_like(img)
@@ -160,11 +180,11 @@ class line_detector():
                 cv2.line(line_image,(x1,y1),(x2,y2),(255,0,0),10) # Draw a Blue Line(BGR in OpenCV)
 
         combo_image = cv2.addWeighted(img,0.8,line_image,1,1)    # Imposing the line_image on the original image
-         
+
         return combo_image
 
 
-            
+
     def get_lines_slope_intecept(self,img, lines):
         left_lines = []
         right_lines = []
@@ -176,11 +196,11 @@ class line_detector():
             return np.sqrt((y2-y1)**2 + (x2-x1)**2)
 
         def get_line_slope_intercept(line):
-            
+
             x1, y1, x2, y2 = line
             if x2-x1 == 0:
                 return np.inf, 0
-            
+
             slope = (y2-y1)/(x2-x1)
             intercept = y1 - slope * x1
             return slope, intercept
@@ -209,20 +229,20 @@ class line_detector():
                 else:
                     filtered_lines_idx.append(idx)
 
-                
-        
+
+
         filtered_lines = np.delete(lines,filtered_lines_idx,0)
-                
+
         # average
         left_avg = np.dot(left_lengths, left_lines)/np.sum(left_lengths) if len(left_lengths) > 0 else None
         right_avg = np.dot(right_lengths, right_lines)/np.sum(right_lengths) if len(right_lengths) > 0 else None
-        
+
         y1 = img.shape[0]
-        y2 = img.shape[0] * .5
+        y2 = img.shape[0] * .6
 
 
         def convert_slope_intercept_to_line(y1, y2 , line):
-    
+
             slope, intercept = line
             x1 = int((y1- intercept)/slope)
             y1 = int(y1)

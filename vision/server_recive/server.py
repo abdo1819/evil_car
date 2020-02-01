@@ -1,9 +1,0 @@
-import imagiz
-import cv2
-
-server=imagiz.Server()
-while True:
-    message=server.receive()
-    frame=cv2.imdecode(message.image,1)
-    cv2.imshow("",frame)
-    cv2.waitKey(1)

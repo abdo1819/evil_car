@@ -1,4 +1,4 @@
-from res.models.erfnet import Net
+from .res.models.erfnet import Net
 
 import torch
 import torch.nn.functional as F
@@ -22,7 +22,7 @@ class lane_detector_nn():
         weights_name = 'weights_erfnet.pth'
 
 
-        weights_path = os.path.join('res', 'weights', weights_name)
+        weights_path = os.path.join('vision_nn','res', 'weights', weights_name)
         # weights_path = 'state_dict.pth'
 
         if torch.cuda.is_available():
@@ -83,6 +83,5 @@ class lane_detector_nn():
             output = cv2.resize(output, (image.shape[1], image.shape[0]), interpolation=cv2.INTER_NEAREST)
             image = cv2.addWeighted(image, 1, output, 0.4, 0)
             
-            # Visualization
-            cv2.imshow("frame", cv2.resize(image, (320, 240), cv2.INTER_NEAREST))
-            cv2.waitKey(1)
+            return image
+            
