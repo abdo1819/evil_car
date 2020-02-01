@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import scipy
 from scipy import integrate
 import time
 import board
@@ -108,7 +109,7 @@ class accel:
             arrz=np.zeros((1,4097))
             print("2nd test")
             for i in range (4097):
-                self.add_acc_val(arrx,time.time(),0.001,arry,arrz)
+                self.add_acc_val(arrx,time.time(),0.001/6,arry,arrz)
                 # end=time.time()#########extra seconds why?????????????????
 
 
@@ -118,9 +119,11 @@ class accel:
 
             self.smooth_accl(arrx,arry,arrz)
             humbs = self.detect_humbs(arrz,arrx)#hump detect
-            speed_accelometer=self.calc_speed(arrx,.001,arry,arrz)
-            
-            return humbs,speed_accelometer
+            speed_accelometer=self.calc_speed(arrx,.001/6,arry,arrz)
+            print('speed__',speed_accelometer)
+            speed=np.sqrt(np.power(speed_accelometer[1],2)+np.power(speed_accelometer[0],2))            
+            print("__total",speed)
+            return humbs,speed_accelometer[0:1]
         
         # print(speed_accelometer)
     #########read gps second time
