@@ -97,7 +97,7 @@ class gsm:
         time.sleep(2)
         ser.write(str.encode('AT+CIPSEND'+'\r\n'))
         
-        request =str.encode("GET " + request +" HTTP/1.1\r\nHost:"+ host.split('"')[1] + "\r\n\r\n")
+        request =str.encode("GET " + request +" HTTP/1.1\r\nHost:"+ host.split('"')[1] + "\r\n\r\n\r")
         ser.write(request )
         ser.write(str.encode(chr(26)))
         time.sleep(2)
