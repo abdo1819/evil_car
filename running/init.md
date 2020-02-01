@@ -67,6 +67,8 @@ you may call me just __before presenting i will server with some data
 
 ## you can view camera result at
 https://youtu.be/3U70DeE1qAc
+original
+https://github.com/harveenchadha/Udacity-CarND-Vehicle-Detection-and-Tracking/blob/master/project_video.mp4
 
 i can not run it in pi because it uses gpu for processing
 
