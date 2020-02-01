@@ -120,11 +120,11 @@ class accel:
             self.smooth_accl(arrx,arry,arrz)
             humbs = self.detect_humbs(arrz,arrx)#hump detect
             speed_accelometer=self.calc_speed(arrx,.001/6,arry,arrz)
-            print(speed_accelometer)
-            speed=np.square(np.power(speed_accelometer[1],2)+np.power(speed_accelometer[0],2))            
-            return humbs,speed_accelometer[0]
+            print('speed__',speed_accelometer)
+            speed=np.sqrt(np.power(speed_accelometer[1],2)+np.power(speed_accelometer[0],2))            
+            print("__total",speed)
+            return humbs,speed_accelometer[0:1]
         
         # print(speed_accelometer)
     #########read gps second time
     ######apply kalman filter 
-

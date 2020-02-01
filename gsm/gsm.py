@@ -138,7 +138,7 @@ class gsm:
         content=JSON.dumps(data)
         ser.write(str.encode('AT+CIPSEND'+'\r\n'))
         time.sleep(2)
-        request =str.encode(write_request(content,host.split('"')[1],"GET",request)+ "\r\n\r\n")
+        request =str.encode(write_request(content,host.split('"')[1],"POST",request)+ "\r\n\r\n")
         ser.write(request )
         ser.write(str.encode(chr(26)))
         time.sleep(2)
@@ -161,4 +161,3 @@ class gsm:
         time.sleep(1)
         reply=ser.read(ser.inWaiting())
         return reply      
-         
