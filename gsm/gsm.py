@@ -38,7 +38,7 @@ class gsm:
 
 
         self.serial_port='/dev/ttyUSB0'
-        self.ser=serial.Serial(self.serial_port, baudrate=115200, timeout=5)
+        self.ser=serial.Serial(self.serial_port, baudrate=115200, timeout=6)
         #check the GSM+GPRS module 
         self.ser.write(str.encode('AT'+'\r\n'))
         time.sleep(2)
@@ -60,6 +60,7 @@ class gsm:
         ''' set all current parameters to user defined profile'''
         ser.write(str.encode('ATZ'+'\r\n'))
         time.sleep(2)
+        self.ser.write(str.encode('AT+GPSRD=0'+'\r\n'))
         reply=ser.read(ser.inWaiting())
         self.debug(reply)     
         time.sleep(1)
@@ -145,7 +146,9 @@ class gsm:
         ser.write(str.encode(chr(26)))
         time.sleep(2)
         reply=ser.read(ser.inWaiting())
+        time.sleep(2)
 
+        self.ser.write(str.encode('AT+GPSRD=1'+'\r\n'))
         self.debug(reply)
          
     
