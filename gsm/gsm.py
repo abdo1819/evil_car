@@ -41,6 +41,8 @@ class gsm:
         self.ser=serial.Serial(self.serial_port, baudrate=115200, timeout=5)
         #check the GSM+GPRS module 
         self.ser.write(str.encode('AT'+'\r\n'))
+        time.sleep(2)
+        self.ser.write(str.encode('AT+GPSRD=0'+'\r\n'))
         time.sleep(2)    
         reply=self.ser.readline()
         print(reply)  
