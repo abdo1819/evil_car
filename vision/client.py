@@ -12,7 +12,7 @@ while True:
     r,frame=vid.read()
     if r:
         detector = line_detector()
-        lines = detector.get_lines(frame)
+        lines,lines_all = detector.get_lines(frame)
         lines_image  = detector.image_with_lines(frame,lines)
 
         r, image = cv2.imencode('.jpg', lines_image, encode_param)
