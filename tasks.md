@@ -1,7 +1,7 @@
 # repo maintenance
 - [ ] get last version from pi
 - [ ] remove redundant files 
-
+- [ ] seprate tasks to modules
 
 # gps
 - [ ] use seprate gps pin 
