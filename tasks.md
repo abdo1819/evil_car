@@ -22,7 +22,7 @@
 - [ ] implemnt violation logic 
 
 # server 
-<!--link to server tasks-->
+[tasks](https://github.com/abdo1819/server_evilcar/tree/master/tasks.md)
 
 
 # soft work
