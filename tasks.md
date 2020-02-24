@@ -4,9 +4,11 @@
 - [ ] seprate tasks to modules
 
 # gps
-- [ ] use seprate gps pin 
+- [x] use seprate gps pin 
+- [ ] document that 
+- [ ] write code se
 
-# gsm
+ gsm
 - [ ] raise exeptions for connection problems
 - [ ] use seprate thread for sending data
 
