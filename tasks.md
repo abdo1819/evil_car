@@ -18,11 +18,7 @@
 
 
 # image processing 
-- [ ] add documentaion
-- [ ] same model for cars and land detection 
-  
-- [ ] implemnt violation logic 
-
+[img_tasks](https://github.com/abdo1819/car_vision/blob/master/tasks.md)
 # server 
 [tasks](https://github.com/abdo1819/server_evilcar/tree/master/tasks.md)
 
